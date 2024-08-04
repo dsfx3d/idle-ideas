@@ -1,9 +1,0 @@
-{
-  "name": "idle-ideas",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/idle-ideas",
-  "projectType": "application",
-  "tags": [],
-  "// targets": "to see all targets run: nx show project idle-ideas --web",
-  "targets": {}
-}

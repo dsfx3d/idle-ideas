@@ -1,9 +1,0 @@
-{
-  "name": "idle-ideas-e2e",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/idle-ideas-e2e/src",
-  "tags": [],
-  "implicitDependencies": ["idle-ideas"],
-  "// targets": "to see all targets run: nx show project idle-ideas-e2e --web",
-  "targets": {}
-}
