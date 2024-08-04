@@ -6,6 +6,14 @@ const jiti = createJiti(fileURLToPath(import.meta.url));
 jiti("./src/env/server");
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: "avatars.githubusercontent.com",
+      },
+    ],
+  },
+};
 
 export default nextConfig;
