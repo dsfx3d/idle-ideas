@@ -6,9 +6,9 @@ import {
   ReposGroupsQueryVariables,
   SearchRepoItemFragment,
 } from "~/gql/graphql";
-import {type Repositories} from "./Repositories";
+import {type Repositories} from "../Repositories";
 
-export async function toUserRepos(
+export async function fetchRepoGroups(
   client: GraphQLClient,
   username: string,
 ): Promise<ComponentProps<typeof Repositories>["repos"]> {

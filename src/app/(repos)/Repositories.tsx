@@ -1,6 +1,6 @@
 import {RepoGroup} from "./RepoGroup";
-import {SearchRepo} from "./SearchRepo";
 import {SearchRepoItemFragment} from "~/gql/graphql";
+import {SearchRepos} from "./SearchRepos";
 
 type TProps = {
   repos: {
@@ -11,9 +11,9 @@ type TProps = {
 
 export function Repositories({repos}: TProps) {
   return (
-    <SearchRepo>
+    <SearchRepos>
       <RepoGroup heading="Active Repositories" repos={repos.active} />
       <RepoGroup heading="Popular Repositories" repos={repos.popular} />
-    </SearchRepo>
+    </SearchRepos>
   );
 }

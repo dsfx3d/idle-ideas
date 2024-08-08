@@ -2,9 +2,9 @@ import {NextAuthProvider} from "~/providers/NextAuthProvider";
 import {Repositories} from "./(repos)/Repositories";
 import {SignInButton} from "./SignInButton";
 import {authOptions} from "./api/auth/[...nextauth]/authOptions";
+import {fetchRepoGroups} from "./(repos)/_data/fetchRepoGroups";
 import {getServerSession} from "next-auth";
 import {githubClient} from "~/lib/githubClient";
-import {toUserRepos} from "./(repos)/toRepoGroups.server";
 import Image from "next/image";
 
 export default async function HomePage() {
@@ -22,7 +22,7 @@ export default async function HomePage() {
             className="rounded-full"
           />
           <Repositories
-            repos={await toUserRepos(
+            repos={await fetchRepoGroups(
               githubClient(session.accessToken),
               session.user.username,
             )}

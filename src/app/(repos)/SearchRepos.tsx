@@ -14,7 +14,7 @@ type TProps = {
   popularRepos?: SearchRepoItemFragment[];
 };
 
-export function SearchRepo({children}: TProps) {
+export function SearchRepos({children}: TProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState("");
   return (

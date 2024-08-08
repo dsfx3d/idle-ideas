@@ -1,0 +1,9 @@
+# import "./SearchRepoItem.gql"
+
+query SearchRepos($query: String!) {
+  search(query: $query, type: REPOSITORY, first: 5) {
+    nodes {
+      ...SearchRepoItem
+    }
+  }
+}
