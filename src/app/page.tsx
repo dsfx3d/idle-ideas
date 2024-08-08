@@ -1,4 +1,4 @@
-import {ListUserOrganizationsQuery, ListUserReposQuery} from "~/gql/graphql";
+import {ListUserReposQuery} from "~/gql/graphql";
 import {NextAuthProvider} from "~/providers/NextAuthProvider";
 import {SignInButton} from "./SignInButton";
 import {authOptions} from "./api/auth/[...nextauth]/authOptions";

@@ -1,6 +1,8 @@
 import "./globals.css";
 import {Inter as FontSans} from "next/font/google";
+import {authOptions} from "./api/auth/[...nextauth]/authOptions";
 import {cn} from "~/lib/utils";
+import {getServerSession} from "next-auth";
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -15,9 +17,11 @@ const fontSans = FontSans({
 
 type RootLayoutProps = {
   children: React.ReactNode;
+  signIn: React.ReactNode;
 };
 
-export default async function RootLayout({children}: RootLayoutProps) {
+export default async function RootLayout({children, signIn}: RootLayoutProps) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -27,7 +31,7 @@ export default async function RootLayout({children}: RootLayoutProps) {
           fontSans.variable,
         )}
       >
-        {children}
+        {session ? children : signIn}
       </body>
     </html>
   );
