@@ -1,7 +1,5 @@
 import "./globals.css";
 import {Inter as FontSans} from "next/font/google";
-import {NextAuthProvider} from "~/providers/NextAuthProvider";
-import {Session} from "next-auth";
 import {cn} from "~/lib/utils";
 import type {Metadata} from "next";
 
@@ -17,10 +15,9 @@ const fontSans = FontSans({
 
 type RootLayoutProps = {
   children: React.ReactNode;
-  session: Session;
 };
 
-export default async function RootLayout({children, session}: RootLayoutProps) {
+export default async function RootLayout({children}: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -30,7 +27,7 @@ export default async function RootLayout({children, session}: RootLayoutProps) {
           fontSans.variable,
         )}
       >
-        <NextAuthProvider session={session}>{children}</NextAuthProvider>
+        {children}
       </body>
     </html>
   );

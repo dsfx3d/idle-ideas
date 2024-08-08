@@ -1,3 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "eslint-config-dsfx3d"]
+  "extends": ["next/core-web-vitals", "eslint-config-dsfx3d"],
+  "ignorePatterns": ["node_modules/", ".next/", ".trunk/", "src/**/gql/"]
 }

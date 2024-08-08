@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {NextAuthOptions} from "next-auth";
 import {env} from "~/env/server";
 import GithubProvider from "next-auth/providers/github";
@@ -12,9 +13,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt({account, token, profile}) {
       if (account) {
-        token.accessToken = account.access_token;
-        token.username = profile?.login;
-        token.url = profile?.url;
+        token.accessToken = account.access_token!;
+        token.username = profile!.login!;
+        token.url = profile!.url!;
       }
       return token;
     },

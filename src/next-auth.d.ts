@@ -12,20 +12,20 @@ declare module "next-auth" {
   }
 
   export interface User extends BaseUser {
-    username?: string;
-    url?: string;
+    username: string;
+    url: string;
   }
 
   export interface Session extends BaseSession {
-    accessToken?: string;
+    accessToken: string;
     user: User;
   }
 }
 
 declare module "next-auth/jwt" {
   export interface JWT extends BaseJWT {
-    accessToken?: string;
-    username?: string;
-    url?: string;
+    accessToken: string;
+    username: string;
+    url: string;
   }
 }
