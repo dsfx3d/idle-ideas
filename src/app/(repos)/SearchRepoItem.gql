@@ -1,0 +1,6 @@
+fragment SearchRepoItem on Repository {
+  id
+  name: nameWithOwner
+  description: shortDescriptionHTML
+  stars: stargazerCount
+}

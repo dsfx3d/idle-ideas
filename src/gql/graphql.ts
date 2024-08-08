@@ -31643,25 +31643,23 @@ export type WorkflowsParametersInput = {
   workflows: Array<WorkflowFileReferenceInput>;
 };
 
-export type IssueTemplateQueryVariables = Exact<{
-  repo: Scalars['String']['input'];
-  owner: Scalars['String']['input'];
-  number: Scalars['Int']['input'];
-}>;
-
-
-export type IssueTemplateQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', nameWithOwner: string, owner: { __typename?: 'Organization', avatarUrl: any } | { __typename?: 'User', avatarUrl: any }, issue?: { __typename?: 'Issue', number: number, title: string, state: IssueState, bodyHTML: any, bodyText: string, author?: { __typename?: 'Bot', login: string, url: any } | { __typename?: 'EnterpriseUserAccount', login: string, url: any } | { __typename?: 'Mannequin', login: string, url: any } | { __typename?: 'Organization', login: string, url: any } | { __typename?: 'User', login: string, url: any } | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number } } | null } | null };
-
-export type ListUserReposQueryVariables = Exact<{
+export type ReposGroupsQueryVariables = Exact<{
   username: Scalars['String']['input'];
 }>;
 
 
-export type ListUserReposQuery = { __typename?: 'Query', user?: { __typename?: 'User', repositories: { __typename?: 'RepositoryConnection', nodes?: Array<{ __typename?: 'Repository', id: string, nameWithOwner: string, url: any } | null> | null } } | null };
+export type ReposGroupsQuery = { __typename?: 'Query', user?: { __typename?: 'User', popularRepos: { __typename?: 'RepositoryConnection', nodes?: Array<(
+        { __typename?: 'Repository' }
+        & { ' $fragmentRefs'?: { 'SearchRepoItemFragment': SearchRepoItemFragment } }
+      ) | null> | null }, activeRepos: { __typename?: 'RepositoryConnection', nodes?: Array<(
+        { __typename?: 'Repository' }
+        & { ' $fragmentRefs'?: { 'SearchRepoItemFragment': SearchRepoItemFragment } }
+      ) | null> | null } } | null };
 
+export type SearchRepoItemFragment = { __typename?: 'Repository', id: string, name: string, description: any, stars: number } & { ' $fragmentName'?: 'SearchRepoItemFragment' };
 
-export const IssueTemplateDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"IssueTemplate"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"repo"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"owner"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"number"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"repository"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"repo"}}},{"kind":"Argument","name":{"kind":"Name","value":"owner"},"value":{"kind":"Variable","name":{"kind":"Name","value":"owner"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nameWithOwner"}},{"kind":"Field","name":{"kind":"Name","value":"owner"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"issue"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"number"},"value":{"kind":"Variable","name":{"kind":"Name","value":"number"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"state"}},{"kind":"Field","name":{"kind":"Name","value":"bodyHTML"}},{"kind":"Field","name":{"kind":"Name","value":"bodyText"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}}]}}]}}]}}]}}]} as unknown as DocumentNode<IssueTemplateQuery, IssueTemplateQueryVariables>;
-export const ListUserReposDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ListUserRepos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"repositories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"100"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nameWithOwner"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]} as unknown as DocumentNode<ListUserReposQuery, ListUserReposQueryVariables>;
+export const SearchRepoItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SearchRepoItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Repository"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","alias":{"kind":"Name","value":"name"},"name":{"kind":"Name","value":"nameWithOwner"}},{"kind":"Field","alias":{"kind":"Name","value":"description"},"name":{"kind":"Name","value":"shortDescriptionHTML"}},{"kind":"Field","alias":{"kind":"Name","value":"stars"},"name":{"kind":"Name","value":"stargazerCount"}}]}}]} as unknown as DocumentNode<SearchRepoItemFragment, unknown>;
+export const ReposGroupsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ReposGroups"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"login"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"popularRepos"},"name":{"kind":"Name","value":"repositories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"5"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"field"},"value":{"kind":"EnumValue","value":"STARGAZERS"}},{"kind":"ObjectField","name":{"kind":"Name","value":"direction"},"value":{"kind":"EnumValue","value":"DESC"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"SearchRepoItem"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"activeRepos"},"name":{"kind":"Name","value":"repositories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"5"}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"field"},"value":{"kind":"EnumValue","value":"PUSHED_AT"}},{"kind":"ObjectField","name":{"kind":"Name","value":"direction"},"value":{"kind":"EnumValue","value":"DESC"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"SearchRepoItem"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SearchRepoItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Repository"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","alias":{"kind":"Name","value":"name"},"name":{"kind":"Name","value":"nameWithOwner"}},{"kind":"Field","alias":{"kind":"Name","value":"description"},"name":{"kind":"Name","value":"shortDescriptionHTML"}},{"kind":"Field","alias":{"kind":"Name","value":"stars"},"name":{"kind":"Name","value":"stargazerCount"}}]}}]} as unknown as DocumentNode<ReposGroupsQuery, ReposGroupsQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -63298,18 +63296,17 @@ export type WorkflowsParametersInput = {
   workflows: Array<WorkflowFileReferenceInput>;
 };
 
-export type IssueTemplateQueryVariables = Exact<{
-  repo: Scalars['String']['input'];
-  owner: Scalars['String']['input'];
-  number: Scalars['Int']['input'];
-}>;
-
-
-export type IssueTemplateQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', nameWithOwner: string, owner: { __typename?: 'Organization', avatarUrl: any } | { __typename?: 'User', avatarUrl: any }, issue?: { __typename?: 'Issue', number: number, title: string, state: IssueState, bodyHTML: any, bodyText: string, author?: { __typename?: 'Bot', login: string, url: any } | { __typename?: 'EnterpriseUserAccount', login: string, url: any } | { __typename?: 'Mannequin', login: string, url: any } | { __typename?: 'Organization', login: string, url: any } | { __typename?: 'User', login: string, url: any } | null, comments: { __typename?: 'IssueCommentConnection', totalCount: number } } | null } | null };
-
-export type ListUserReposQueryVariables = Exact<{
+export type ReposGroupsQueryVariables = Exact<{
   username: Scalars['String']['input'];
 }>;
 
 
-export type ListUserReposQuery = { __typename?: 'Query', user?: { __typename?: 'User', repositories: { __typename?: 'RepositoryConnection', nodes?: Array<{ __typename?: 'Repository', id: string, nameWithOwner: string, url: any } | null> | null } } | null };
+export type ReposGroupsQuery = { __typename?: 'Query', user?: { __typename?: 'User', popularRepos: { __typename?: 'RepositoryConnection', nodes?: Array<(
+        { __typename?: 'Repository' }
+        & { ' $fragmentRefs'?: { 'SearchRepoItemFragment': SearchRepoItemFragment } }
+      ) | null> | null }, activeRepos: { __typename?: 'RepositoryConnection', nodes?: Array<(
+        { __typename?: 'Repository' }
+        & { ' $fragmentRefs'?: { 'SearchRepoItemFragment': SearchRepoItemFragment } }
+      ) | null> | null } } | null };
+
+export type SearchRepoItemFragment = { __typename?: 'Repository', id: string, name: string, description: any, stars: number } & { ' $fragmentName'?: 'SearchRepoItemFragment' };

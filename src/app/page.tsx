@@ -1,22 +1,15 @@
-import {ListUserReposQuery} from "~/gql/graphql";
 import {NextAuthProvider} from "~/providers/NextAuthProvider";
+import {Repositories} from "./(repos)/Repositories";
 import {SignInButton} from "./SignInButton";
 import {authOptions} from "./api/auth/[...nextauth]/authOptions";
 import {getServerSession} from "next-auth";
 import {githubClient} from "~/lib/githubClient";
-import {toUserRepos} from "./(repos)/toUserRepos.server";
+import {toUserRepos} from "./(repos)/toRepoGroups.server";
 import Image from "next/image";
 
-// eslint-disable-next-line complexity, max-statements
-export default async function Home() {
+export default async function HomePage() {
   const session = await getServerSession(authOptions);
 
-  const repos = session
-    ? await toUserRepos(
-        githubClient(session.accessToken),
-        session.user.username,
-      )
-    : ([] as ListUserReposQuery);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {session && (
@@ -28,17 +21,17 @@ export default async function Home() {
             height={64}
             className="rounded-full"
           />
-          {repos?.user?.repositories?.nodes?.map(org => (
-            <div key={org?.url}>
-              <a href={org?.url}>{org?.nameWithOwner}</a>
-              {org?.id}
-            </div>
-          ))}
+          <Repositories
+            repos={await toUserRepos(
+              githubClient(session.accessToken),
+              session.user.username,
+            )}
+          />
+          <NextAuthProvider>
+            <SignInButton />
+          </NextAuthProvider>
         </>
       )}
-      <NextAuthProvider>
-        <SignInButton />
-      </NextAuthProvider>
     </main>
   );
 }

@@ -13,8 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query IssueTemplate($repo: String!, $owner: String!, $number: Int!) {\n  repository(name: $repo, owner: $owner) {\n    nameWithOwner\n    owner {\n      avatarUrl\n    }\n    issue(number: $number) {\n      author {\n        login\n        url\n      }\n      number\n      title\n      state\n      bodyHTML\n      bodyText\n      comments {\n        totalCount\n      }\n    }\n  }\n}": types.IssueTemplateDocument,
-    "query ListUserRepos($username: String!) {\n  user(login: $username) {\n    repositories(first: 100) {\n      nodes {\n        id\n        nameWithOwner\n        url\n      }\n    }\n  }\n}": types.ListUserReposDocument,
+    "query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}": types.ReposGroupsDocument,
+    "fragment SearchRepoItem on Repository {\n  id\n  name: nameWithOwner\n  description: shortDescriptionHTML\n  stars: stargazerCount\n}": types.SearchRepoItemFragmentDoc,
 };
 
 /**
@@ -34,11 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query IssueTemplate($repo: String!, $owner: String!, $number: Int!) {\n  repository(name: $repo, owner: $owner) {\n    nameWithOwner\n    owner {\n      avatarUrl\n    }\n    issue(number: $number) {\n      author {\n        login\n        url\n      }\n      number\n      title\n      state\n      bodyHTML\n      bodyText\n      comments {\n        totalCount\n      }\n    }\n  }\n}"): (typeof documents)["query IssueTemplate($repo: String!, $owner: String!, $number: Int!) {\n  repository(name: $repo, owner: $owner) {\n    nameWithOwner\n    owner {\n      avatarUrl\n    }\n    issue(number: $number) {\n      author {\n        login\n        url\n      }\n      number\n      title\n      state\n      bodyHTML\n      bodyText\n      comments {\n        totalCount\n      }\n    }\n  }\n}"];
+export function graphql(source: "query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"): (typeof documents)["query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ListUserRepos($username: String!) {\n  user(login: $username) {\n    repositories(first: 100) {\n      nodes {\n        id\n        nameWithOwner\n        url\n      }\n    }\n  }\n}"): (typeof documents)["query ListUserRepos($username: String!) {\n  user(login: $username) {\n    repositories(first: 100) {\n      nodes {\n        id\n        nameWithOwner\n        url\n      }\n    }\n  }\n}"];
+export function graphql(source: "fragment SearchRepoItem on Repository {\n  id\n  name: nameWithOwner\n  description: shortDescriptionHTML\n  stars: stargazerCount\n}"): (typeof documents)["fragment SearchRepoItem on Repository {\n  id\n  name: nameWithOwner\n  description: shortDescriptionHTML\n  stars: stargazerCount\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

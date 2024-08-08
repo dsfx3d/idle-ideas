@@ -1,0 +1,22 @@
+# import "./SearchRepoItem.gql"
+
+query ReposGroups($username: String!) {
+  user(login: $username) {
+    popularRepos: repositories(
+      first: 5
+      orderBy: {field: STARGAZERS, direction: DESC}
+    ) {
+      nodes {
+        ...SearchRepoItem
+      }
+    }
+    activeRepos: repositories(
+      first: 5
+      orderBy: {field: PUSHED_AT, direction: DESC}
+    ) {
+      nodes {
+        ...SearchRepoItem
+      }
+    }
+  }
+}
