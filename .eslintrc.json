@@ -1,4 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "eslint-config-dsfx3d"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint-config-dsfx3d",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
+  ],
   "ignorePatterns": ["node_modules/", ".next/", ".trunk/", "src/**/gql/"]
 }

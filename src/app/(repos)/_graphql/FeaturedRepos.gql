@@ -1,9 +1,9 @@
 # import "./SearchRepoItem.gql"
 
-query ReposGroups($username: String!) {
+query FeaturedRepos($username: String!) {
   user(login: $username) {
     popularRepos: repositories(
-      first: 5
+      first: 3
       orderBy: {field: STARGAZERS, direction: DESC}
     ) {
       nodes {
@@ -11,7 +11,7 @@ query ReposGroups($username: String!) {
       }
     }
     activeRepos: repositories(
-      first: 5
+      first: 3
       orderBy: {field: PUSHED_AT, direction: DESC}
     ) {
       nodes {

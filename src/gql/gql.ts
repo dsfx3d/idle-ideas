@@ -13,9 +13,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}": types.ReposGroupsDocument,
+    "query FeaturedRepos($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 3\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 3\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}": types.FeaturedReposDocument,
     "fragment SearchRepoItem on Repository {\n  id\n  name: nameWithOwner\n  description: shortDescriptionHTML\n  stars: stargazerCount\n}": types.SearchRepoItemFragmentDoc,
-    "query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 5) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}": types.SearchReposDocument,
+    "query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 3) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}": types.SearchReposDocument,
 };
 
 /**
@@ -35,7 +35,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"): (typeof documents)["query ReposGroups($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 5\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 5\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"];
+export function graphql(source: "query FeaturedRepos($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 3\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 3\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"): (typeof documents)["query FeaturedRepos($username: String!) {\n  user(login: $username) {\n    popularRepos: repositories(\n      first: 3\n      orderBy: {field: STARGAZERS, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n    activeRepos: repositories(\n      first: 3\n      orderBy: {field: PUSHED_AT, direction: DESC}\n    ) {\n      nodes {\n        ...SearchRepoItem\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -43,7 +43,7 @@ export function graphql(source: "fragment SearchRepoItem on Repository {\n  id\n
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 5) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}"): (typeof documents)["query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 5) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}"];
+export function graphql(source: "query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 3) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}"): (typeof documents)["query SearchRepos($query: String!) {\n  search(query: $query, type: REPOSITORY, first: 3) {\n    nodes {\n      ...SearchRepoItem\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

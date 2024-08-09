@@ -8,11 +8,17 @@ import {
 
 export async function fetchUserRepos(
   client: GraphQLClient,
-  query: string,
+  {
+    query,
+    username,
+  }: {
+    query: string;
+    username: string;
+  },
 ): Promise<SearchRepoItemFragment[]> {
   const result = await client.request<
     SearchReposQuery,
     SearchReposQueryVariables
-  >(SearchReposDocument, {query});
+  >(SearchReposDocument, {query: `user:${username} ${query}`});
   return (result.search.nodes ?? []) as SearchRepoItemFragment[];
 }
