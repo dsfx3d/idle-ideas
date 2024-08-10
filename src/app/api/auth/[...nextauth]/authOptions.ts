@@ -10,6 +10,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: env.GITHUB_SECRET,
     }),
   ],
+  jwt: {
+    maxAge: 7 * 60 * 60, // 7 hours
+  },
   callbacks: {
     jwt({account, token, profile}) {
       if (account) {
