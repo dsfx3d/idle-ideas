@@ -23,5 +23,6 @@ export function useRepos({query}: TOptions) {
         );
       }
     },
+    enabled: query.length > 0,
   });
 }
